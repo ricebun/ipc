@@ -1,6 +1,6 @@
 {
-  "short_name": "my pwa",
-  "name": "my pwa",
+  "short_name": "SGH IPC",
+  "name": "SGH IPC",
   "icons": [
     {
       "src": "favicon.ico",
@@ -24,8 +24,8 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": "https://home-vent.web.app/",
+  "start_url": "https://sgh-ipc-160c0.web.app/",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#ffffff",
   "background_color": "#ffffff"
 }

@@ -1,10 +1,12 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { BLOCKS } from '@contentful/rich-text-types';
 import _ from 'lodash';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Container, Icon } from 'semantic-ui-react';
+
+import * as styles from './ArticleStyle';
+import Header from './Header';
 
 /** embed video via contentful: https://www.contentfulcommunity.com/t/embed-youtube-or-vimeo-video-directly-into-rich-text-content-type/2639/3 */
 function Article() {
@@ -20,17 +22,31 @@ function Article() {
       [BLOCKS.EMBEDDED_ASSET]: (node) => {
         const { data } = node;
         const imgUrl = `https:${data.target.fields.file.url}`;
-        return <img src={imgUrl} alt="" />;
-      },
-      [INLINES.HYPERLINK]: (node) => {
-        const { data } = node;
-        const videoId = _.split(data.uri, 'watch?v=')[1];
         return (
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}`}
-            title={videoId}
-          />
+          <styles.ImageWrapper>
+            <img src={imgUrl} alt="" />
+          </styles.ImageWrapper>
         );
+      },
+      [BLOCKS.PARAGRAPH]: (node, children) => {
+        const { content } = node;
+        const videoLinkEl = _.find(
+          content,
+          (el) => el.nodeType === 'hyperlink'
+        );
+        if (videoLinkEl) {
+          const videoId = _.split(videoLinkEl.data.uri, 'watch?v=')[1];
+          return (
+            <styles.VideoWrapper>
+              <iframe
+                src={`https://www.youtube.com/embed/${videoId}`}
+                title={videoId}
+              />
+            </styles.VideoWrapper>
+          );
+        } else {
+          return <p>{children}</p>;
+        }
       },
     },
   };
@@ -40,17 +56,19 @@ function Article() {
   };
 
   return (
-    <Container text>
-      <Button icon onClick={handleBackClick}>
-        <Icon name="chevron left" />
-      </Button>
-      <h2>{selectedArticle.articleTitle}</h2>
-      {selectedArticle.articleContent.nodeType === 'document' && (
-        <div>
-          {documentToReactComponents(selectedArticle.articleContent, options)}
-        </div>
-      )}
-    </Container>
+    <styles.ArticleContainer>
+      <Header
+        title={selectedArticle.articleTitle}
+        backFunction={handleBackClick}
+      />
+      <styles.ArticleContent>
+        {selectedArticle.articleContent.nodeType === 'document' && (
+          <div>
+            {documentToReactComponents(selectedArticle.articleContent, options)}
+          </div>
+        )}
+      </styles.ArticleContent>
+    </styles.ArticleContainer>
   );
 }
 

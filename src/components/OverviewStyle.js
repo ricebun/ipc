@@ -1,16 +1,22 @@
-import { Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-export const OverviewContainer = styled(Container)`
-  &&& {
-    width: 100%;
-    // height: 100vh;
-    box-sizing: border-box;
-    // border: 1px solid red;
-    padding: 12px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+const headerHeightProp = (props) => props.theme.headerHeight;
+
+export const OverviewContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+export const NavCards = styled.div`
+  position: relative;
+  top: ${headerHeightProp};
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  padding-top: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
 `;
