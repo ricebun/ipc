@@ -1,21 +1,23 @@
 import styled from 'styled-components';
 
+import theme from './ThemeConstants';
+
 export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
   top: 0;
   width: 100%;
-  padding: 18px 12px 12px;
+  padding: 22px 12px;
   margin-bottom: 12px;
   box-sizing: border-box;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 20px;
-  color: #ffffff; // white
+  color: ${theme.colors.white};
   text-align: center;
-  border-bottom: 1px solid #eef2f5; // slate10
-  background: #003d7c; // duke blue
+  border-bottom: 1px solid ${theme.colors.slate_10};
+  background: ${theme.colors.duke_blue};
   // box shadow TODO
 `;
 

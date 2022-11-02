@@ -6,7 +6,6 @@ import { createGlobalStyle } from 'styled-components';
 import Article from './components/Article';
 import Overview from './components/Overview';
 import store from './data/store';
-import Theme from './Theme';
 
 function Providers() {
   const router = createBrowserRouter([
@@ -22,10 +21,8 @@ function Providers() {
 
   return (
     <Provider store={store}>
-      <Theme>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-      </Theme>
+      <GlobalStyle />
+      <RouterProvider router={router} />
     </Provider>
   );
 }

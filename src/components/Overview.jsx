@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import client from '../contentfulClient';
 import { loadArticlesSuccess } from '../data/reducer';
+import { overviewStyles } from '../styles';
 import Header from './Header';
 import NavCard from './NavCard';
-import * as styles from './OverviewStyle';
 
 function Overview() {
   const dispatch = useDispatch();
@@ -49,15 +49,15 @@ function Overview() {
   };
 
   return (
-    <styles.OverviewContainer>
+    <overviewStyles.OverviewContainer>
       <Header title="Articles" />
-      <styles.NavCards>
+      <overviewStyles.NavCards>
         {articles.length > 0 &&
           articles.map((article) => (
             <NavCard id={article.id} article={article} key={article.id} />
           ))}
-      </styles.NavCards>
-    </styles.OverviewContainer>
+      </overviewStyles.NavCards>
+    </overviewStyles.OverviewContainer>
   );
 }
 

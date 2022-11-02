@@ -1,25 +1,23 @@
 import styled from 'styled-components';
 
-const headerHeightProp = (props) => props.theme.headerHeight;
+import { BaseContentContainer } from '../styles/GlobalStyle';
+import theme from '../styles/ThemeConstants';
 
-export const ArticleContainer = styled.div`
+export const PageContainer = styled.div`
   height: 100%;
   position: relative;
 `;
 
+export const ArticleContainer = styled(BaseContentContainer)`
+  height: calc(100% - ${theme.headerHeight});
+`;
+
 export const ArticleContent = styled.div`
-  position: absolute;
-  top: ${headerHeightProp};
-  width: 100%;
-  padding: 12px;
-  padding-top: 0;
-  box-sizing: border-box;
-  height: calc(100% - ${headerHeightProp});
+  height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
-
   &::-webkit-scrollbar {
     /* Safari and Chrome */
     width: 0; /* Remove scrollbar space */

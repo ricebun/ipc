@@ -2,7 +2,8 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-import * as styles from './HeaderStyle';
+import { headerStyles as styles } from '../styles';
+import theme from '../styles/ThemeConstants';
 
 function Header(props) {
   const { title, backFunction } = props;
@@ -13,8 +14,9 @@ function Header(props) {
         <styles.BackArrowWrapper>
           <FontAwesomeIcon
             icon={faAngleLeft}
-            color="#ffffff"
+            color={theme.colors.white}
             onClick={backFunction}
+            size="2x"
           />
         </styles.BackArrowWrapper>
       )}

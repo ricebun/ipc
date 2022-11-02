@@ -5,7 +5,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import * as styles from './ArticleStyle';
+import { articleStyles } from '../styles';
 import Header from './Header';
 
 /** embed video via contentful: https://www.contentfulcommunity.com/t/embed-youtube-or-vimeo-video-directly-into-rich-text-content-type/2639/3 */
@@ -23,9 +23,9 @@ function Article() {
         const { data } = node;
         const imgUrl = `https:${data.target.fields.file.url}`;
         return (
-          <styles.ImageWrapper>
+          <articleStyles.ImageWrapper>
             <img src={imgUrl} alt="" />
-          </styles.ImageWrapper>
+          </articleStyles.ImageWrapper>
         );
       },
       [BLOCKS.PARAGRAPH]: (node, children) => {
@@ -37,12 +37,12 @@ function Article() {
         if (videoLinkEl) {
           const videoId = _.split(videoLinkEl.data.uri, 'watch?v=')[1];
           return (
-            <styles.VideoWrapper>
+            <articleStyles.VideoWrapper>
               <iframe
                 src={`https://www.youtube.com/embed/${videoId}`}
                 title={videoId}
               />
-            </styles.VideoWrapper>
+            </articleStyles.VideoWrapper>
           );
         } else {
           return <p>{children}</p>;
@@ -56,19 +56,24 @@ function Article() {
   };
 
   return (
-    <styles.ArticleContainer>
+    <articleStyles.PageContainer>
       <Header
         title={selectedArticle.articleTitle}
         backFunction={handleBackClick}
       />
-      <styles.ArticleContent>
-        {selectedArticle.articleContent.nodeType === 'document' && (
-          <div>
-            {documentToReactComponents(selectedArticle.articleContent, options)}
-          </div>
-        )}
-      </styles.ArticleContent>
-    </styles.ArticleContainer>
+      <articleStyles.ArticleContainer>
+        <articleStyles.ArticleContent>
+          {selectedArticle.articleContent.nodeType === 'document' && (
+            <div>
+              {documentToReactComponents(
+                selectedArticle.articleContent,
+                options
+              )}
+            </div>
+          )}
+        </articleStyles.ArticleContent>
+      </articleStyles.ArticleContainer>
+    </articleStyles.PageContainer>
   );
 }
 

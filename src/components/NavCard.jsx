@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import * as styles from './NavCardStyle';
+import { navCardStyles } from '../styles';
 
 function NavCard(props) {
   const { id, article } = props;
@@ -12,11 +12,11 @@ function NavCard(props) {
   };
 
   return (
-    <styles.NavCardWrapper>
-      <styles.NavCard onClick={navigateToArticle}>
+    <navCardStyles.NavCardWrapper>
+      <navCardStyles.NavCard onClick={navigateToArticle}>
         {article.articleTitle}
-      </styles.NavCard>
-    </styles.NavCardWrapper>
+      </navCardStyles.NavCard>
+    </navCardStyles.NavCardWrapper>
   );
 }
 
