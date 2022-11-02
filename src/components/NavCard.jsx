@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card } from 'semantic-ui-react';
 
-import * as styles from './NavCardStyle';
+import { navCardStyles } from '../styles';
 
 function NavCard(props) {
   const { id, article } = props;
@@ -13,9 +12,11 @@ function NavCard(props) {
   };
 
   return (
-    <styles.NavCardWrapper>
-      <Card onClick={navigateToArticle}>{article.articleTitle}</Card>
-    </styles.NavCardWrapper>
+    <navCardStyles.NavCardWrapper>
+      <navCardStyles.NavCard onClick={navigateToArticle}>
+        {article.articleTitle}
+      </navCardStyles.NavCard>
+    </navCardStyles.NavCardWrapper>
   );
 }
 
